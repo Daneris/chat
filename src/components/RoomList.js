@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Form from "./Form.js";
+
 
 
 class RoomList extends Component {
@@ -7,12 +7,10 @@ class RoomList extends Component {
     super(props);
     this.state = {
       rooms: [],
-      newRoomName: ""
+      name: ""
 
     }
  this.roomsRef = this.props.firebase.database().ref('rooms');
-
-
 
 
   }
@@ -31,58 +29,52 @@ componentDidMount() {
 
   })
 
-  this.eventListeners = {
-    roomupdate: e => {
-      this.setState({
-        newRoomName: e.target.value
-      })
 
-    }
-  }
 }
 
   createRoom(newRoomName) {
 
+    if (!newRoomName) { return }
+        this.roomsRef.push({
+          name: newRoomName,
+        });
+        this.setState({ newRoomName: '' });
+      }
 
-      this.roomsRef.push({name:newRoomName})
 
-
-    this.setState({
-      newRoomName: ""
-      })
-
-    }
 
   handleChange(e) {
     this.setState({newRoomName: e.target.value})
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.createRoom(this.state.newRoomName)
-  }
+
 
   render(){
     return(
       <section>
-        <div>List of rooms</div>
+        <ul>
 
-        {this.state.rooms.map((data,index) =>
-          <div key={index}>
+        {this.state.rooms.map((room,index) =>
+          <li key={room.key}>
 
-          {data.name}
-          </div>
-
+          {room.name}
+          </li>
 
         )}
-      <section>
-      <Form
-        handleCreateRoom={(e) => this.handleCreateRoom(e)}
-        handleChange={(e) => this.handleChange(e)}
-        handleSubmit={(e) => this.handleSubmit(e)}
-        />
+        </ul>
+        <form id="create-room" onSubmit={ (e) => { e.preventDefault(); this.createRoom(this.state.newRoomName)} }>
+          <input type="text"
+                  value={this.state.newRoomName}
+                  onChange={this.handleChange.bind(this)}
+                  name="newRoomName"
+                  placeholder="Create new room" />
+          <input type="submit" value="+" />
+        </form>
+
+
+
       </section>
-      </section>
+
 
 
     )
