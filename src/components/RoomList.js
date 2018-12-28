@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 
 
+
 class RoomList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rooms: [],
-      name: ""
+      name: "",
+
 
     }
  this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -20,7 +22,7 @@ class RoomList extends Component {
 
 componentDidMount() {
   this.roomsRef.on("child_added", snapshot => {
-    console.log(snapshot);
+
     const room = snapshot.val();
     room.key = snapshot.key;
     this.setState({
@@ -51,17 +53,19 @@ componentDidMount() {
 
   render(){
     return(
-      <section>
-        <ul>
 
-        {this.state.rooms.map((room,index) =>
-          <li key={room.key}>
+        <section>
 
-          {room.name}
-          </li>
+          <ul>
 
-        )}
-        </ul>
+          {this.state.rooms.map((room,index) =>
+            <li key={room.key} onClick={() => this.props.setActiveRoom(room)}>
+
+            {room.name}
+            </li>
+
+          )}
+          </ul>
         <form id="create-room" onSubmit={ (e) => { e.preventDefault(); this.createRoom(this.state.newRoomName)} }>
           <input type="text"
                   value={this.state.newRoomName}
@@ -70,7 +74,6 @@ componentDidMount() {
                   placeholder="Create new room" />
           <input type="submit" value="+" />
         </form>
-
 
 
       </section>
