@@ -52,6 +52,7 @@ componentDidMount() {
 
 
   render(){
+    console.log("this.props",this.props)
     return(
 
         <section>
@@ -61,7 +62,10 @@ componentDidMount() {
           {this.state.rooms.map((room,index) =>
             <li key={room.key} onClick={() => this.props.setActiveRoom(room)}>
 
+
+
             {room.name}
+            {this.props.activeRoomName === room.key ? " Active" : " "}
             </li>
 
           )}

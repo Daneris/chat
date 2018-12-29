@@ -25,21 +25,22 @@ class App extends Component {
   }
 
 setActiveRoom(e){
+
 console.log(e)
 let newHighlight = e.key;
 
-this.setState = ({activeRoomName: newHighlight})
-return(
-  <button><span>newHighlight</span></button>
-)
+this.setState({activeRoomName: newHighlight})
+
 }
 
   render() {
     return (
       <div className="App">
         <RoomList firebase={firebase}
+        activeRoomName = {this.state.activeRoomName}
           setActiveRoom={(e) => this.setActiveRoom(e)}/>
-        <MessageList firebase={firebase}/>
+        <MessageList firebase={firebase}
+        activeRoomName = {this.state.activeRoomName}/>
 
       </div>
     );
