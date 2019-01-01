@@ -27,12 +27,11 @@ componentDidMount() {
     room.key = snapshot.key;
     this.setState({
       rooms: this.state.rooms.concat(room)
-    })
+          })
 
-  })
+        })
 
-
-}
+      }
 
   createRoom(newRoomName) {
 

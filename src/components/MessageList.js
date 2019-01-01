@@ -27,27 +27,17 @@ class MessageList extends Component {
 
 
 
-
   render() {
 
     return(
+      <ul>
+        {this.state.messages.filter((message) => message.roomId === this.props.activeRoomName).map((message) =>
+          <li key={message.key}>
+            {message.content}
+          </li>
 
-
-            <ul>
-            {this.state.messages.filter((message) => message.roomId === this.props.activeRoomName).map((message) =>
-              <li key={message.key}>
-
-              {message.content}
-              </li>
-
-                   )}
-            </ul>
-
-
-
-
-
-
+            )}
+        </ul>
 
         )
       }
