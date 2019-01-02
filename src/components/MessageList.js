@@ -30,12 +30,16 @@ class MessageList extends Component {
 
 
 createMessage() {
-
+  let timeStamp = new Date();
+      timeStamp = timeStamp.toLocaleTimeString();
   this.messagesRef.push({
     content: this.state.newMessage,
     roomId: this.props.activeRoomName,
-    user: this.props.user
+    username: this.props.user.displayName,
+    sentAt: timeStamp
       });
+      console.log(`this props user displayName`, this.props.user.displayName)
+      console.log(`timestamp`, timeStamp)
       this.setState({ newMessage: '' });
 
 }
