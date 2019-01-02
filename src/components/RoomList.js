@@ -47,14 +47,7 @@ componentDidMount() {
     this.setState({newRoomName: e.target.value})
   }
 
-  deleteRoom(room) {
 
-      console.log(`room`, room)
-
-
-
-
-  }
 
 
   render(){
@@ -64,16 +57,18 @@ componentDidMount() {
       <section>
       <ul>
 
-          {this.state.rooms.map((room,index) =>
+          {this.state.rooms.filter((room) => room.key).map((room,index) =>
             <li key={room.key} onClick={() => this.props.setActiveRoom(room)}>
+
 
 
 
             {room.name}
             {this.props.activeRoomName === room.key ? " Active" : " "}
+              
             </li>
+            )}
 
-          )}
           </ul>
 
 

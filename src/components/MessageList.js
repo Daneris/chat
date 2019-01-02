@@ -35,7 +35,7 @@ createMessage() {
   this.messagesRef.push({
     content: this.state.newMessage,
     roomId: this.props.activeRoomName,
-    username: this.props.user.displayName,
+    username: this.props.user.displayName || "Guest",
     sentAt: timeStamp
       });
       console.log(`this props user displayName`, this.props.user.displayName)
