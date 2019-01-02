@@ -43,20 +43,26 @@ componentDidMount() {
       }
 
 
-
   handleChange(e) {
     this.setState({newRoomName: e.target.value})
   }
 
+  deleteRoom(room) {
+
+      console.log(`room`, room)
+
+
+
+
+  }
 
 
   render(){
-    console.log("this.props",this.props)
+
     return(
 
-        <section>
-
-          <ul>
+      <section>
+      <ul>
 
           {this.state.rooms.map((room,index) =>
             <li key={room.key} onClick={() => this.props.setActiveRoom(room)}>
@@ -69,6 +75,8 @@ componentDidMount() {
 
           )}
           </ul>
+
+
         <form id="create-room" onSubmit={ (e) => { e.preventDefault(); this.createRoom(this.state.newRoomName)} }>
           <input type="text"
                   value={this.state.newRoomName}
@@ -77,8 +85,6 @@ componentDidMount() {
                   placeholder="Create new room" />
           <input type="submit" value="+" />
         </form>
-
-
       </section>
 
 

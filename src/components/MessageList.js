@@ -48,6 +48,17 @@ handleChange(e) {
   this.setState({newMessage: e.target.value})
 }
 
+deleteMessage(message) {
+  console.log(`delete message trigger`)
+  const newMessagess = this.state.messages.filter((mess) => {
+      return mess !== message;
+      })
+      this.setState({
+      messages: newMessagess
+
+      })
+
+}
 
 
   render() {
@@ -58,6 +69,7 @@ handleChange(e) {
         {this.state.messages.filter((message) => message.roomId === this.props.activeRoomName).map((message) =>
           <li key={message.key}>
                   {message.content}
+          <button onClick={() => this.deleteMessage(message)}>Delete</button>
           </li>
 
             )}
