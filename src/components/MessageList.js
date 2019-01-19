@@ -49,7 +49,7 @@ handleChange(e) {
 }
 
 deleteMessage(message) {
-  console.log(`delete message trigger`)
+  console.log(`delete message trigger`, message)
   const newMessagess = this.state.messages.filter((mess) => {
       return mess !== message;
       })
@@ -57,7 +57,7 @@ deleteMessage(message) {
       messages: newMessagess
 
       })
-
+      this.messagesRef.set(newMessagess)
 }
 
 
